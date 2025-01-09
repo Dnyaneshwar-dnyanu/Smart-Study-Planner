@@ -1,0 +1,217 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+header {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+}
+
+.nav {
+    width: 100%;
+    height: 12%;
+    background-color: rgb(26, 14, 80);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    color: rgb(168, 167, 167);
+    border-bottom: 3px solid rgb(0, 0, 0);
+    font-size: larger;
+    box-shadow: 0px 13px 20px 5px rgb(0, 0, 0);
+}
+
+.nav a {
+    font-size: larger;
+    text-decoration: none;
+    color: rgb(168, 167, 167);
+    transition: color 0.3s ease;
+}
+
+.nav a:hover {
+    color: rgb(214, 214, 214);
+}
+
+.title p {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: larger;
+    text-shadow: 2px 2px 4px rgb(152, 10, 187);
+    color: rgb(98, 94, 90);
+    text-transform: uppercase;
+}
+
+.nav li {
+    list-style-type: none;
+    display: inline-block;
+    margin-right: 30px;
+    font-size: medium;
+    padding: 10px;
+}
+
+.nav li:hover {
+    border: 2px solid rgb(168, 167, 167);
+}
+
+.profile ul {
+    display: flex;
+    align-items: center;
+}
+
+.profile li {
+    margin-right: 15px;
+}
+
+.main-container {
+    background-image: url("/Assets/study_hub.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hero-text {
+    text-align: center;
+    color: white;
+    font-size: 40px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    font-weight: bold;
+}
+
+.hero-text p {
+    font-size: 35px;
+    color: #f8f8f8;
+    letter-spacing: 2px;
+}
+
+.menu-icon {
+    font-size: 2rem;
+    color: rgb(168, 167, 167);
+}
+
+@media (max-width: 768px) {
+    .hero-text p {
+        font-size: 24px;
+    }
+
+    .nav {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+    }
+
+    .title p {
+        font-size: 1.5rem;
+    }
+
+    .profile ul {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .profile li {
+        margin-bottom: 10px;
+    }
+}
+
+/* Task Form */
+.form_of_task {
+    margin: 5vh auto;
+    background-color: aqua;
+    width: 50vw;
+    padding-bottom: 10px;
+    border-radius: 10px;
+}
+
+.form_of_task h1 {
+    text-align: center;
+    padding: 20px 0 20px 0;
+}
+
+.paragraph {
+    text-align: center;
+    padding: 0 5px 10px 20px;
+    color: rgb(128, 129, 130);
+    border-bottom: 1px solid rgb(80, 78, 78);
+    margin: 10px;
+}
+
+.input_block {
+    margin: 12px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.input_block input {
+    margin-top: 20px;
+    padding: 5px;
+    border: none;
+    border-bottom: 2px solid black;
+    border-radius: 10px;
+}
+
+.input_block input[type=text], .input_block input[type=date], .input_block input[type=time]{
+    width: 100%;
+}
+
+.input_block label {
+    display: block;
+}
+
+.hidden label {
+    padding-top: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+.input_block button {
+    margin: 0 auto;
+    font-size: large;
+    width: 40%;
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.input_block button:hover {
+    background-color: rgba(118, 117, 117);
+    color: white;
+}
+
+.buttons {
+    display: flex;
+    background-color: transparent;
+}
+
+.back_to_task a {
+    text-decoration: none;
+}
+
+.back_to_task {
+    background-color: transparent;
+    margin-bottom: 0;
+}
+

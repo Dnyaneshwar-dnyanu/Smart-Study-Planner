@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Add New Task</title>
+     <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+     <div class="form_of_task">
+          <h1>Add New Task</h1>
+          <p class="paragraph">
+               &OpenCurlyDoubleQuote; Oraganize and manage your daily tasks efficiently. &CloseCurlyDoubleQuote;
+          </p>
+
+          <form id="add_task">
+               <div class="input_block">
+                    <label for="task_name">Task Name :</label>
+                    <input type="text" id="task_name" required>
+               </div>
+
+               <div class="input_block">
+                    <label for="dead_time">Deadline (optional) :</label>
+                    <input type="date" value="deadline" id="dead_time">
+               </div>
+
+               <div class="input_block set_reminder">
+                    <label for="setReminder"><input type="checkbox" id="setReminder" value="Set reminder"> Set
+                         Reminder</label>
+               </div>
+
+               <div id="reminderFields" class="hidden input_block">
+                    <label for="reminder_date">Date : </label>
+                    <input type="date" id="reminder_date" value="reminder-date">
+                    <label for="reminder_time">Time : </label>
+                    <input type="time" id="reminder_time">
+               </div>
+
+               <div class="input_block">
+                    <label>Priority :</label>
+                    <label><input type="radio" value="High" name="Priority">
+                         High</label>
+                    <label><input type="radio" value="Medium" name="Priority"> Low</label>
+                    <label><input type="radio" value="Low" name="Priority"> Medium</label>
+               </div>
+
+               <div class="input_block buttons">
+                    <button type="reset">Reset</button>
+                    <button type="submit">Submit</button>
+               </div>
+               <div class="input_block back_to_task">
+                    <a href="tasks.html">To go task page!</a>
+               </div>
+          </form>
+     </div>
+
+     <script>
+          document.getElementById('setReminder').addEventListener('change', () => {
+               const reminderFields = document.getElementById('reminderFields');
+               reminderFields.classList.toggle('hidden', !setReminder.checked);
+          });
+
+          document.getElementById('add_task').addEventListener('submit', function (e) {
+               e.preventDefault();
+
+               // Get the task details from input fields
+               const taskName = document.getElementById('task_name').value;
+               const taskDeadLine = document.getElementById('dead_time').value;
+               const reminderDate = document.getElementById('reminder_date').value;
+               const reminderTime = document.getElementById('reminder_time').value;
+               const taskPriority = document.querySelector('input[name="Priority"]:checked')?.value || "Low"; // Default priority
+
+               // Retrieve existing tasks from localStorage or create an empty array
+               const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+               // Add the new task to the array
+               tasks.push({
+                    name: taskName,
+                    deadline: taskDeadLine,
+                    reminderDate: reminderDate,
+                    reminderTime: reminderTime,
+                    priority: taskPriority.toLowerCase(), // Normalize priority for sorting
+               });
+
+               // Sort the tasks based on their priority
+               const priorityMap = {
+                    high: 2,
+                    medium: 1,
+                    low: 0,
+               };
+
+               tasks.sort((a, b) => priorityMap[b.priority] - priorityMap[a.priority]);
+
+               // Save the updated tasks array back to localStorage
+               localStorage.setItem('tasks', JSON.stringify(tasks));
+
+               // Clear the input fields
+               document.getElementById('add_task').reset();
+
+               // Notify and redirect back to Task Page
+               alert('Task added successfully!');
+               window.location.href = 'tasks.html';
+          });
+
+     </script>
+</body>
+
+</html>
