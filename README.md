@@ -11,5 +11,4 @@ Future Vision:
 ![Screenshot 2025-01-10 014330](https://github.com/user-attachments/assets/e5e20b76-36cf-41d1-8f74-390b8f0ff634)
 ![Screenshot 2025-01-10 014344](https://github.com/user-attachments/assets/da98b7c5-337b-464e-9552-c35f1e122bea)
 ![Screenshot 2025-01-10 014432](https://github.com/user-attachments/assets/bbba4027-c422-4e9c-aba0-3b0f41bd3d49)
-![Uploading Screenshot 2025-01-10 014921.png…]()
-
+![Screenshot 2025-01-10 014921](https://github.com/user-attachments/assets/ced7700c-6dcd-4300-9685-c42869106fcd)
