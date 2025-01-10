@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Place</title>
+    <link rel="stylesheet" href="/css/styles_study_place.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.min.css">
+</head>
+
+<body>
+     <!-- <header> -->
+          <div class="nav">
+              <div class="menu">
+                  <a href="#" class="menu-icon"><i class="fi fi-bs-menu-burger"></i></a>
+              </div>
+              <div class="title">
+                  <p>Study Place</p>
+              </div>
+              <div class="profile">
+                  <ul>
+                      <li><a href="home.html">Home</a></li>
+                      <li><a href="study_place.html">Study Place</a></li>
+                      <li><a href="tasks.html">Tasks</a></li>
+                      <li><a href="motivate.html">Motivation</a></li>
+                  </ul>
+              </div>
+          </div>
+      <!-- </header> -->
+
+    <div class="main">
+        <!-- Source Container -->
+        <div class="source-container">
+            <h2>Add Sources</h2>
+            <form id="inputForm">
+                <div class="div">
+                    <label for="title">Title : </label>
+                    <input type="text" id="title" name="title" placeholder="Name of resources!" required>
+                </div>
+                <div class="div">
+                    <label for="link">Add Link : </label>
+                    <input type="url" id="link" name="link" placeholder="https://example.com" required>
+                </div>
+                <button type="submit">Add</button>
+            </form>
+
+            <hr>
+            <h2>Resources</h2>
+            <ul id="sources"></ul>
+        </div>
+
+        <!-- Clock Container -->
+        <div class="clock-container">
+            <div class="timer-outer-circle">
+                <div class="timer-circle" id="timer">15:00</div>
+            </div>
+            <div class="control-buttons">
+                <button onclick="togglePauseResume()">Pause</button>
+                <button onclick="restartTimer()">Restart</button>
+                <button onclick="chooseTime()">Choose Time</button>
+            </div>
+        </div>
+
+        <!-- Calendar Container -->
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <p class="calendar-current-date">January 2025</p>
+                <div class="calendar-navigation">
+                    <span id="calendar-prev">&lt;</span>
+                    <span id="calendar-next">&gt;</span>
+                </div>
+            </div>
+
+            <div class="calendar-body">
+                <ul class="calendar-weekdays">
+                    <li>Sun</li>
+                    <li>Mon</li>
+                    <li>Tue</li>
+                    <li>Wed</li>
+                    <li>Thu</li>
+                    <li>Fri</li>
+                    <li>Sat</li>
+                </ul>
+                <ul class="calendar-dates">
+                    <!-- Add dynamic date entries here -->
+                </ul>
+                <hr>
+                <div class="events">
+                    <div class="tasks_added">
+                        <ol id="taskList"></ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Wait for the DOM to fully load before running the script
+        document.addEventListener("DOMContentLoaded", function () {
+            // Load data from localStorage if available
+            let dataArray = JSON.parse(localStorage.getItem("dataArray")) || [];
+
+            // Event listener for form submission
+            document.getElementById('inputForm').addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent form from refreshing the page
+
+                // Get the values of title and link from inputs
+                const title = document.getElementById('title').value;
+                const link = document.getElementById('link').value;
+
+                // Create a new entry object with title and link
+                const newEntry = {
+                    title: title,
+                    link: link
+                };
+
+                // Add the new entry to the dataArray
+                dataArray.push(newEntry);
+
+                // Save the updated dataArray to localStorage
+                localStorage.setItem('dataArray', JSON.stringify(dataArray));
+
+                // Reset the form fields
+                document.getElementById('inputForm').reset();
+
+                // Call renderSource to display the updated list
+                renderSource();
+            });
+
+            // Function to render the list of sources
+            function renderSource() {
+                const sourceList = document.getElementById('sources');
+                sourceList.innerHTML = ""; // Clear the list before rendering
+
+                // Iterate through the dataArray and create <li> for each entry
+                dataArray.forEach((entry, index) => {
+                    const li = document.createElement('li');
+                    li.className = "source-item";
+
+                    // Create the title text
+                    const titleSpan = document.createElement('span');
+                    titleSpan.className = "source-title";
+                    titleSpan.textContent = entry.title;
+
+                    // Create the "Click here to open the link" button
+                    const openButton = document.createElement('button');
+                    openButton.textContent = "Click Me!";
+                    openButton.className = "open-button";
+                    openButton.onclick = () => window.open(entry.link, "_blank");
+
+                    // Create the "Remove" button
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = "Remove";
+                    removeButton.className = "remove-button";
+                    removeButton.onclick = () => {
+                        // Remove the item from the array and localStorage
+                        dataArray.splice(index, 1);
+                        localStorage.setItem('dataArray', JSON.stringify(dataArray));
+
+                        // Re-render the list after removal
+                        renderSource();
+                    };
+
+                    // Append title and buttons to the list item
+                    li.appendChild(titleSpan);
+                    li.appendChild(openButton);
+                    li.appendChild(removeButton);
+
+                    // Append the list item to the sources list
+                    sourceList.appendChild(li);
+                });
+            }
+
+            // Initial call to render any stored data when the page loads
+            renderSource();
+        });
+    </script>
+    <script src="/js/script_calendar.js" defer></script>
+    <script src="/js/script_timer.js" defer></script>
+</body>
+
+</html>

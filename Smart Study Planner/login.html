@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/styles_login.css">
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+      </div>
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+    <div class="links">
+      <a href="#">Forgot Password?</a>
+      <a href="signup.html">Sign Up</a>
+    </div>
+  </div>
+
+  <script>
+     document.getElementById('loginForm').addEventListener('submit', function (event) {
+       event.preventDefault(); // Prevent form from submitting and reloading the page
+   
+       const email = document.getElementById('email').value;
+       const passwd = document.getElementById('password').value;
+   
+       // Get the login list from localStorage
+       const loginList = JSON.parse(localStorage.getItem("loginList")) || [];
+   
+       // Check if the email and password match any user in the login list
+       const user = loginList.find(user => user.email === email && user.password === passwd);
+   
+       if (user) {
+         // Successful login
+         alert("Login successful! Welcome " + user.name + "!");
+         // Redirect to the dashboard or home page
+         window.location.href = "home.html";
+       } else {
+         // Invalid login
+         alert("Invalid email or password. Please try again.");
+       }
+     });
+   </script>   
+</body>
+</html>
